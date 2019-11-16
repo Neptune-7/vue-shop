@@ -29,7 +29,11 @@ import {
   Tooltip,
   Notification,
   Dialog,
-  MessageBox
+  MessageBox,
+  Tree,
+  Tag,
+  Select,
+  Option
 } from 'element-ui'
 
 Vue.use(Button)
@@ -59,6 +63,10 @@ Vue.use(Switch)
 Vue.use(Pagination)
 Vue.use(Tooltip)
 Vue.use(Dialog)
+Vue.use(Tree)
+Vue.use(Tag)
+Vue.use(Select)
+Vue.use(Option)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message

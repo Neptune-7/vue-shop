@@ -51,7 +51,7 @@
         </el-dropdown>
       </el-header>
       <!-- 右侧内容主体 -->
-      <el-main>
+      <el-main style="background-color:#f0f2f5">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -126,6 +126,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.2);
 }
 
 .hamburger {
