@@ -33,7 +33,8 @@ import {
   Tree,
   Tag,
   Select,
-  Option
+  Option,
+  Cascader
 } from 'element-ui'
 
 Vue.use(Button)
@@ -67,6 +68,7 @@ Vue.use(Tree)
 Vue.use(Tag)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Cascader)
 
 Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message

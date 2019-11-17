@@ -23,3 +23,7 @@ body,
     background: #fff;
     border-bottom: 1px solid #d8dce5;
 } */
+
+.el-cascader-menu{
+  height: 240px;
+}
