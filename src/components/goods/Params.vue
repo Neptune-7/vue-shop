@@ -33,12 +33,14 @@
             <el-table-column type="expand">
               <template slot-scope="scope">
                 <!-- 循环渲染tag标签 -->
-                <el-tag v-for="(item,i) in scope.row.attr_vals" :key="i" closable @close="handleClose(i,scope.row)">{{item}}</el-tag>
+                <el-tag v-for="(item,i) in scope.row.attr_vals" :key="i" closable @close="handleClose(i,scope.row)">
+                  {{item}}</el-tag>
                 <!-- 输入的文本框 -->
                 <el-input class="input-new-tag" v-if="scope.row.inputVisible" v-model="scope.row.inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm(scope.row)" @blur="handleInputConfirm(scope.row)">
                 </el-input>
                 <!-- 添加按钮 -->
-                <el-button v-else class="button-new-tag" size="small" @click="showInput(scope.row)">+ New Tag</el-button>
+                <el-button v-else class="button-new-tag" size="small" @click="showInput(scope.row)">+ New Tag
+                </el-button>
               </template>
             </el-table-column>
             <!-- 索引列 -->
@@ -65,12 +67,14 @@
             <el-table-column type="expand">
               <template slot-scope="scope">
                 <!-- 循环渲染tag标签 -->
-                <el-tag v-for="(item,i) in scope.row.attr_vals" :key="i" closable @close="handleClose(i,scope.row)">{{item}}</el-tag>
+                <el-tag v-for="(item,i) in scope.row.attr_vals" :key="i" closable @close="handleClose(i,scope.row)">
+                  {{item}}</el-tag>
                 <!-- 输入的文本框 -->
                 <el-input class="input-new-tag" v-if="scope.row.inputVisible" v-model="scope.row.inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm(scope.row)" @blur="handleInputConfirm(scope.row)">
                 </el-input>
                 <!-- 添加按钮 -->
-                <el-button v-else class="button-new-tag" size="small" @click="showInput(scope.row)">+ New Tag</el-button>
+                <el-button v-else class="button-new-tag" size="small" @click="showInput(scope.row)">+ New Tag
+                </el-button>
               </template>
             </el-table-column>
             <!-- 索引列 -->
@@ -276,7 +280,7 @@ export default {
           return this.$notify.error({ title: '修改参数失败！', message: '请重新登录后再试' })
         }
 
-        this.$notify.success('修改参数成功！')
+        this.$notify.success({ title: '修改参数成功！' })
         this.getParamsData()
         this.editDialogVisible = false
       })
@@ -299,7 +303,7 @@ export default {
 
       // 用户取消了删除的操作
       if (confirmResult !== 'confirm') {
-        return this.$notify.info('已取消删除！')
+        return this.$notify.info({ title: '已取消删除！' })
       }
 
       // 删除的业务逻辑
@@ -345,7 +349,7 @@ export default {
         return this.$notify.error({ title: '修改参数项失败！', message: '请重新登录后再试' })
       }
 
-      this.$notify.success('修改参数项成功！')
+      this.$notify.success({ title: '修改参数项成功！' })
     },
     // 点击按钮展示文本输入框
     showInput (row) {
@@ -393,18 +397,23 @@ export default {
   font-size: 15px;
   font-weight: 500;
 }
+
 .el-icon-warning:before {
   font-size: 20px;
 }
+
 .el-row {
   margin: 15px 0;
 }
+
 .el-table {
   margin-top: 15px;
 }
+
 .el-tag {
   margin: 10px;
 }
+
 .input-new-tag {
   width: 120px;
 }
