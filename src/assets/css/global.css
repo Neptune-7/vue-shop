@@ -24,6 +24,19 @@ body,
     border-bottom: 1px solid #d8dce5;
 } */
 
-.el-cascader-menu{
+.el-cascader-menu {
   height: 240px;
+}
+
+.el-steps {
+  margin: 15px 0;
+
+}
+
+.el-step__title {
+  font-size: 14px;
+}
+
+.ql-editor {
+  min-height: 300px;
 }

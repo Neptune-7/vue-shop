@@ -201,7 +201,7 @@ export default {
       )
 
       if (res.meta.status !== 200) {
-        return this.$$notify.error({ title: '获取参数列表失败！', message: '请重新登录后再试' })
+        return this.$notify.error({ title: '获取参数列表失败！', message: '请重新登录后再试' })
       }
 
       res.data.forEach(item => {
