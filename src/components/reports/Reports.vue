@@ -1,62 +1,86 @@
 <template>
   <div>
-    <v-chart :force-fit="true" :height="height" :data="data" :scale="scale">
-      <v-tooltip />
-      <v-axis />
-      <v-legend />
-      <v-line position="month*temperature" color="city" />
-      <v-point position="month*temperature" color="city" :size="4" :v-style="style" :shape="'circle'" />
-    </v-chart>
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>数据统计</el-breadcrumb-item>
+      <el-breadcrumb-item>数据报表</el-breadcrumb-item>
+    </el-breadcrumb>
+
+    <!-- 卡片视图区域 -->
+    <el-card>
+      <!-- 2. 为ECharts准备一个具备大小（宽高）的Dom -->
+      <div id="main" style="width: 750px;height:400px;"></div>
+    </el-card>
   </div>
 </template>
 
 <script>
-const DataSet = require('@antv/data-set')
-window.dtb = []
-const sourceData = [
-  { name: '华东', type: 'line', stack: '总量', data: [2999, 3111, 4100, 3565, 3528, 6000] },
-  { name: '华南', type: 'line', stack: '总量', data: [5090, 2500, 3400, 6000, 6400, 7800] },
-  { name: '华北', type: 'line', stack: '总量', data: [6888, 4000, 8010, 12321, 13928, 12984] },
-  { name: '西部', type: 'line', stack: '总量', data: [9991, 4130, 7777, 12903, 13098, 14028] },
-  { name: '其他', type: 'line', stack: '总量', data: [15212, 5800, 10241, 14821, 15982, 14091] }
-]
-console.log(sourceData)
-const datb = window.dtb
-const dv = new DataSet.View().source(datb)
-dv.transform({
-  type: 'fold',
-  // 过滤器
-  fields: datb.series,
-  key: 'name',
-  value: 'temperature'
-})
-const data = dv.rows
-
-const scale = [{
-  dataKey: window.dtb.xAxis,
-  min: 0,
-  max: 1
-}]
+// 1. 导入 echarts
+import echarts from 'echarts'
+import _ from 'lodash'
 
 export default {
   data () {
     return {
-      data,
-      scale,
-      height: 400,
-      style: { stroke: '#fff', lineWidth: 1 }
+      // 需要合并的数据
+      options: {
+        // backgroundColor: '#2c343c',
+        textStyle: {
+          color: '#111'
+        },
+        title: {
+          text: '用户来源'
+        },
+        tooltip: {
+          trigger: 'axis',
+          backgroundColor: 'rgba(165, 165, 165, .7)',
+          color: 'rgba(0, 0, 0)',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: 'rgba(255, 255, 255)',
+              color: '#999'
+            }
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            boundaryGap: false
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ]
+      }
     }
   },
-  created () {
-    this.getReportsData()
-  },
-  methods: {
-    async getReportsData () {
-      const { data: res } = await this.$http.get('/reports/type/1')
-      window.dtb = res.data
-      console.log(window.dtb)
+  created () { },
+  // 此时，页面上的元素，已经被渲染完毕了！
+  async mounted () {
+    // 3. 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'), 'light')
+
+    const { data: res } = await this.$http.get('reports/type/1')
+    if (res.meta.status !== 200) {
+      return this.$message.error('获取折线图数据失败！')
     }
-  }
+
+    // 4. 准备数据和配置项
+    const result = _.merge(res.data, this.options)
+
+    // 5. 展示数据
+    myChart.setOption(result)
+  },
+  methods: {}
 }
 </script>
 

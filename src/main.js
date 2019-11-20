@@ -8,7 +8,7 @@ import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
 // 导入viser图表插件
-import Viser from 'viser-vue'
+// import Viser from 'viser-vue'
 // 导入table插件
 import TreeTable from 'vue-table-with-tree-grid'
 // 导入富文本编辑器
@@ -18,7 +18,7 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
-Vue.use(Viser)
+// Vue.use(Viser)
 // 配置请求的根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 axios.interceptors.request.use(config => {
