@@ -222,7 +222,7 @@ export default {
     add () {
       this.$refs.addFormRef.validate(async valid => {
         if (!valid) {
-          return this.$$notify.error({ title: '请填写必要的表单项' })
+          return this.$notify.error({ title: '请填写必要的表单项' })
         }
         // 执行添加业务逻辑
         // lodash cloneDeep(obj) 深拷贝
@@ -264,9 +264,11 @@ export default {
 .el-chackbox {
   margin: 0 10p 0 0 !important;
 }
+
 .previewImg {
   width: 100%;
 }
+
 .btnAdd {
   margin-top: 15px;
 }
